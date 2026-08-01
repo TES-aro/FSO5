@@ -17,7 +17,6 @@ const Toggle = (props) => {
 				<button onClick={toggleVisibility}>{props.buttonLabel}</button>
 			</div>
 			<div style={showWhenVisible}>
-
 				{props.children}
 				<button onClick={toggleVisibility}>{cancelLabel}</button>
 			</div>
