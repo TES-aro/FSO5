@@ -6,6 +6,7 @@ const Message = ({message, isError}) => {
 		)
 	}
 	if (isError) {
+		console.log('making an error')
 		return (
 			<div className="error">
 				{message}

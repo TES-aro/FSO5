@@ -5,17 +5,18 @@ import Login from './components/Login.jsx';
 import User from './components/User.jsx';
 import AddBlog from './components/AddBlog.jsx'
 import {TestButton} from './components/TestButton.jsx'
-import Notification from './components/Notification.jsx'
+import Message from './components/Message.jsx'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
-  const [user, setUser] = useState()
+  const [user, setUser] = useState(null)
 
-	const [notification, setNotification] = useState(null)
+	const [notif, setNotification] = useState(null)
+	const [err, setErr] = useState(null)
 	const addNotification = (text) => {
 		console.log(`new notification: ${text}`)
-		setNotification(text)
-		console.log(`notification: ${notification}`)
+		const newNotif = text
+		setNotification(newNotif)
 		setTimeout(() => {
 			setNotification(null)
 		}, 5000)
@@ -36,12 +37,14 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-	  setUser(JSON.parse(window.localStorage.getItem('loggedNoteappUser')))
+	  const windowUser = JSON.parse(window.localStorage.getItem('loggedNoteappUser'))
+	  console.log(`windowUser: ${windowUser}`)
   }, [])
 
   return (
     <div>
-    	<Notification notification={notification} />
+    	<Message isError='false' message={notif} />
+    	<Message isError='true' message={err} />
     	<User user={user} setUser={setUser} />
     	<Login user={user} setUser={setUser} />
     	<TestButton addNotification={addNotification} />
