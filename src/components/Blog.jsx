@@ -15,7 +15,7 @@ const Blog = ({ blog, blogs, setBlogs, setNotif, user }) => {
 	const blogPStyle = {
 		paddingTop: 0,
 		marginBottom: 0
-	}
+	};
 
 	const [visible, setVisible] = useState(false);
 	const hideWhenVisible = { display: visible ? 'none' : '' };
