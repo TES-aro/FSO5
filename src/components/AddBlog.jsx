@@ -1,30 +1,35 @@
-import {useState} from 'react';
-import {addBlog} from '../services/blogs.js';
+import { useState } from 'react';
+import { addBlog } from '../services/blogs.js';
 
-const AddBlog = ({user, updateBlogs}) => {
+const AddBlog = ({ user, updateBlogs, setError }) => {
+	const [title, setTitle] = useState('');
+	const [author, setAuthor] = useState('');
+	const [url, setUrl] = useState('');
 
 	if (!user) {
 		return (
 			<>
 			</>
-		)
+		);
 	}
-	const [title, setTitle] = useState('');
-	const [author, setAuthor] = useState('');
-	const [url, setUrl] = useState('');
-
 	const handleSubmit = async (event) => {
-		event.preventDefault()
+		event.preventDefault();
 		const token = user.token;
 		try{
-			const newBlog = await addBlog(token, title, author, url)
-			updateBlogs(newBlog)
+			const newBlog = await addBlog(token, title, author, url);
+			console.log('new blog');
+			newBlog.addedBy = user.username;
+			console.log(newBlog);
+			updateBlogs(newBlog);
+			setTitle('');
+			setAuthor('');
+			setUrl('');
 		} catch(e) {
-			//error handling goes here
+			console.log(e);
+			setError(e);
 		}
 
-	}
-	
+	};
 
 	return (
 		<>
@@ -36,7 +41,7 @@ const AddBlog = ({user, updateBlogs}) => {
 						<input
 							type='text'
 							value={title}
-							onChange={({target}) => setTitle(target.value)}
+							onChange={({ target }) => setTitle(target.value)}
 						/>
 					</label>
 				</div>
@@ -46,7 +51,7 @@ const AddBlog = ({user, updateBlogs}) => {
 						<input
 							type='text'
 							value={author}
-							onChange={({target}) => setAuthor(target.value)}
+							onChange={({ target }) => setAuthor(target.value)}
 						/>
 					</label>
 				</div>
@@ -56,14 +61,14 @@ const AddBlog = ({user, updateBlogs}) => {
 						<input
 							type='text'
 							value={url}
-							onChange={({target}) => setUrl(target.value)}
+							onChange={({ target }) => setUrl(target.value)}
 						/>
 					</label>
 				</div>
 				<button type='submit'>add</button>
 			</form>
 		</>
-	)
-}
+	);
+};
 
-export default AddBlog
+export default AddBlog;
