@@ -24,14 +24,16 @@ const Blog = ({ blog, blogs, setBlogs, setNotif, user }) => {
 		setVisible(!visible);
 	};
 
+	const testID = `${blog.title} by ${blog.author}`
+
 	return (
-  	<div style={blogStyle}>
+  	<li style={blogStyle} key={testID}>
   	  <div style={hideWhenVisible}>
-  		<p style={blogPStyle}>
-  	  	{blog.title} by {blog.author}
-  	  	<br />
-  	  	<button onClick={toggleVisibility}> show more </button>
-  	  </p>
+  			<p style={blogPStyle} data-testid={testID}>
+  	  		{blog.title} by {blog.author}
+  	  		<br />
+  	  		<button onClick={toggleVisibility}> show more </button>
+  	  	</p>
   	  </div>
   	  <div style={showWhenVisible}>
   			<p style={blogPStyle}>
@@ -48,7 +50,7 @@ const Blog = ({ blog, blogs, setBlogs, setNotif, user }) => {
 					<button onClick={toggleVisibility}> show less </button>
 				</p>
 			</div>
-  	</div>
+  	</li>
 	);
 };
 

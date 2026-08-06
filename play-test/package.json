@@ -1,0 +1,21 @@
+{
+  "name": "play-test",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+	  "test": "playwright test",
+	  "test:report": "playwright show-report",
+	  "start:test": "node --watch index.js"
+  },
+  "dependencies": {
+    "playwright": "^1.62.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.1.2"
+  }
+}

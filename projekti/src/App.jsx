@@ -35,10 +35,13 @@ const App = () => {
 		}
 		setErr(text);
 	};
+
 	const updateBlogs = (blog) => {
 	  console.log('in updateBlogs function');
 	  setBlogs([...blogs, blog]);
 	};
+
+	const visRef = useRef();
 
 	useEffect(() => {
 		blogService.getAll().then(blogs => {
@@ -59,8 +62,9 @@ const App = () => {
     	<Message isError='true' message={err} />
     	<User user={user} setUser={setUser} />
     	<Login user={user} setUser={setUser} setError={setErr} />
-    	<Toggle buttonLabel="Add Blog">
-    		<AddBlog user={user} updateBlogs={updateBlogs} setError={setErr} ref={blogRef}/>
+    	<Toggle buttonLabel="Add Blog" ref={visRef}>
+    		<AddBlog user={user} updateBlogs={updateBlogs} setError={setErr} ref={blogRef}
+    		 visible={visRef}/>
     	</Toggle>
     	<Blogs setNotif={setNotif} user={user} blogs={blogs} setBlogs={setBlogs}/>
 		</div>

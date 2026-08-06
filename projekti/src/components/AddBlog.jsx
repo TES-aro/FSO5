@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { addBlog } from '../services/blogs.js';
 
-const AddBlog = ({ user, updateBlogs, setError }) => {
+const AddBlog = ({ user, updateBlogs, setError, visible }) => {
 	const [title, setTitle] = useState('');
 	const [author, setAuthor] = useState('');
 	const [url, setUrl] = useState('');
@@ -24,6 +24,7 @@ const AddBlog = ({ user, updateBlogs, setError }) => {
 			setTitle('');
 			setAuthor('');
 			setUrl('');
+			visible.current.toggleVisibility();
 		} catch(e) {
 			console.log(e);
 			setError(e);
